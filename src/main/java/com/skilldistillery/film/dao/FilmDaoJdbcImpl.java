@@ -5,10 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 import com.skilldistillery.film.entities.Film;
-import com.skilldistillery.film.entities.Actor;
 
 public class FilmDaoJdbcImpl implements FilmDAO {
 
@@ -50,6 +48,23 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 			System.err.println(e);
 		}
 		return film;
+	}
+	@Override
+	public Film deleteFilm(int filmId) {
+	       Film film = null;
+	       try {
+	       Connection conn;
+	       conn = DriverManager.getConnection(URL, user, pass);
+	       String sqlst = "Select Distinct f.id, f.title, f.description, f.release_year, f.language_id, f.rental_duration, "
+	    		   + "f.rental_rate, f.length, f.replacement_cost, f.rating, f.special_features, l.name from film f inner join language l on l.id = f.language_id where f.id = ?";
+	       PreparedStatement stmt = conn.prepareStatement(sqlst);
+	       stmt.setInt(1, filmId);
+	       ResultSet rs = stmt.executeQuery();
+		} catch (SQLException e) {
+		
+			e.printStackTrace();
+		}
+			return film;
 	}
 
 }

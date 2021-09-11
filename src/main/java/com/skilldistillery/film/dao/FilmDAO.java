@@ -4,4 +4,7 @@ import com.skilldistillery.film.entities.Film;
 
 public interface FilmDAO {
 	Film findFilmById(int filmId);
+	Film deleteFilm(int filmId);
+	
 }
+

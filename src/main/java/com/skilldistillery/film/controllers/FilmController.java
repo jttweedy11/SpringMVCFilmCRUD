@@ -31,4 +31,10 @@ public class FilmController {
 		mv.setViewName("WEVB-INF/results.jsp");
 		return mv;
 	}
+	
+	@RequestMapping(path="DeleteFilm.do", params = "id", method = RequestMethod.POST)
+	public ModelAndView deleteFilm(Int id) {
+		ModelAndView mv = new ModelAndView();
+		return mv;
+	}
 }
