@@ -6,9 +6,9 @@ public interface FilmDAO {
 	Film findFilmById(int filmId);
 	Film deleteFilm(int filmId);
 	public Film createFilm (Film film);
-	public Actor findActorById(int actorId);
+//	public Actor findActorById(int actorId);
 	public Film updateFilm (Film film);
-	public List<Actor> findActorByFilmId(int filmId);
+//	public List<Actor> findActorByFilmId(int filmId);
 	
 	
 }

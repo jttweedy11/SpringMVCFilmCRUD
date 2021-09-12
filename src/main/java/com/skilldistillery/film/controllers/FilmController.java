@@ -28,30 +28,30 @@ public class FilmController {
 		ModelAndView mv = new ModelAndView();
 		Film film = filmDAO.findFilmById(id);
 		mv.addObject("film", film);
-		mv.setViewName("WEB-INF/results.jsp");
+		mv.setViewName("WEB-INF/views/results.jsp");
 		return mv;
 	}
 	
-	@RequestMapping(path="DeleteFilm.do", params = "id", method = RequestMethod.POST)
-	public ModelAndView deleteFilm(Int id) {
-		ModelAndView mv = new ModelAndView();
-		return mv;
-	}
+//	@RequestMapping(path="DeleteFilm.do", params = "id", method = RequestMethod.POST)
+//	public ModelAndView deleteFilm(Int id) {
+//		ModelAndView mv = new ModelAndView();
+//		return mv;
+//	}
 	
-	@RequestMapping(path = "createFilm.do", method = RequestMethod.POST)
-	public ModelAndView updateFilm() {
-		ModelAndView mv = new ModelAndView();
-		Film film = dao.createFilm(filmData);
-		mv.addObject("film", film);
-		mv.setViewName("createFilmResult.jsp");
-		return mv;
-	}
-	@RequestMapping(path = "createFilm.do", method = RequestMethod.POST)
-	public ModelAndView createFilm(Film film) {
-		ModelAndView mv = new ModelAndView();
-		Film film = dao.updateFilm(film);
-		mv.addObject("Film", film);
-		mv.setViewName("updteFilmResult.jsp");
-		return mv;
-	}
+//	@RequestMapping(path = "createFilm.do", method = RequestMethod.POST)
+//	public ModelAndView updateFilm() {
+//		ModelAndView mv = new ModelAndView();
+//		Film film = dao.createFilm(filmData);
+//		mv.addObject("film", film);
+//		mv.setViewName("createFilmResult.jsp");
+//		return mv;
+//	}
+//	@RequestMapping(path = "createFilm.do", method = RequestMethod.POST)
+//	public ModelAndView createFilm(Film film) {
+//		ModelAndView mv = new ModelAndView();
+//		Film film = dao.updateFilm(film);
+//		mv.addObject("Film", film);
+//		mv.setViewName("updteFilmResult.jsp");
+//		return mv;
+//	}
 }

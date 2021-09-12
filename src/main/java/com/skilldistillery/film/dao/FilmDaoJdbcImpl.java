@@ -18,6 +18,10 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 	private static String URL = "jdbc:mysql://localhost:3306/sdvid?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=US/Mountain";
 	private String user = "root";
 	private String pass = "root";
+	
+	public FilmDaoJdbcImpl() throws ClassNotFoundException {
+		Class.forName("com.mysql.jdbc.Driver");
+	}
 
 	@Override
 	public Film findFilmById(int filmId) {
@@ -53,83 +57,76 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 		}
 		return film;
 	}
+
 	@Override
 	public Film deleteFilm(int filmId) {
-	       Film film = null;
-	       try {
-	       Connection conn;
-	       conn = DriverManager.getConnection(URL, user, pass);
-	       String sqlst = "Select Distinct f.id, f.title, f.description, f.release_year, f.language_id, f.rental_duration, "
-	    		   + "f.rental_rate, f.length, f.replacement_cost, f.rating, f.special_features, l.name from film f inner join language l on l.id = f.language_id where f.id = ?";
-	       PreparedStatement stmt = conn.prepareStatement(sqlst);
-	       stmt.setInt(1, filmId);
-	       ResultSet rs = stmt.executeQuery();
+		Film film = null;
+		try {
+			Connection conn;
+			conn = DriverManager.getConnection(URL, user, pass);
+			String sqlst = "Select Distinct f.id, f.title, f.description, f.release_year, f.language_id, f.rental_duration, "
+					+ "f.rental_rate, f.length, f.replacement_cost, f.rating, f.special_features, l.name from film f inner join language l on l.id = f.language_id where f.id = ?";
+			PreparedStatement stmt = conn.prepareStatement(sqlst);
+			stmt.setInt(1, filmId);
+			ResultSet rs = stmt.executeQuery();
 		} catch (SQLException e) {
-		
+
 			e.printStackTrace();
 		}
-			return film;
+		return film;
 	}
-	
-	public Film createFilm(Film film) {
-		Connection conn = null;
-		
-			
-		conn = DriverManager.getConnection(URL, user, pass);
-		conn.setAutoCommit(false);
-		
-		String sqlst = "INSERT INTO film (f.title, f.description, f.release_year, f.language_id, f.rental_duration, \"\n"
-				+ "	    		   + \"f.rental_rate, f.length, f.replacement_cost, f.rating, f.special_features, l.name from film f inner join language l on l.id = f.language_id where f.id = ?";
-		
-		PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-		
-		stmt.setString(1, f.title());
-		stmt.setString(2, "1");
-		stmt.setInt(3, f.rental_duration());
-		stmt.setDouble(4, f.rental_rate());
-		stmt.setDouble(5, f.replacement_cost());
-		int updateCount = stmt.executeUpdate();
-		System.out.println(updateCount + " film was created.");
-		if (updateCount == 1) {
-			ResultSet keys = stmt.getGeneratedKeys();
-			if (keys.next()) {
-				int newFilmId = keys.getInt(1);					
-				film.setId(newFilmId);
-				
-			}
-		}
-		conn.commit();
-		stmt.close();
-		conn.close();
-	} catch (SQLException e) {
-		e.printStackTrace();
-		if (conn != null) {
-			try {
-				conn.rollback();
-			} catch (SQLException e1) {
-				System.err.println("Error rolling back.");
-				e1.printStackTrace();
-			}
-		}
-	
-	return film;
-}
+
 	@Override
-	public Actor findActorById(int actorId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Film createFilm(Film film) {
+		Film film1 = null;
+		try {
+			Connection conn = null;
+
+			conn = DriverManager.getConnection(URL, user, pass);
+			conn.setAutoCommit(false);
+
+			String sqlst = "INSERT INTO film (title, description, release_year, language_id, rental_duration, \"\n"
+					+ "	    		   + \"f.rental_rate, f.length, f.replacement_cost, f.rating, f.special_features, l.name from film f inner join language l on l.id = f.language_id where f.id = ?";
+
+			PreparedStatement stmt = conn.prepareStatement(sqlst, Statement.RETURN_GENERATED_KEYS);
+
+//		stmt.setString(1, f.title());
+//		stmt.setString(2, "1");
+//		stmt.setInt(3, f.rental_duration());
+//		stmt.setDouble(4, f.rental_rate());
+//		stmt.setDouble(5, f.replacement_cost());
+			int updateCount = stmt.executeUpdate();
+			System.out.println(updateCount + " film was created.");
+			if (updateCount == 1) {
+				ResultSet keys = stmt.getGeneratedKeys();
+				if (keys.next()) {
+					int newFilmId = keys.getInt(1);
+					film.setId(newFilmId);
+
+				}
+			}
+			conn.commit();
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return film1;
 	}
+
+//	@Override
+//	public Actor findActorById(int actorId) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 	@Override
 	public Film updateFilm(Film film) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	@Override
-	public List<Actor> findActorByFilmId(int filmId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-		
-	
-
+//	@Override
+//	public List<Actor> findActorByFilmId(int filmId) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 }
