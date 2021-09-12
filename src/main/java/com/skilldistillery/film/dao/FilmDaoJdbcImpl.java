@@ -1,11 +1,15 @@
 package com.skilldistillery.film.dao;
 
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
 
+import com.skilldistillery.film.entities.Actor;
 import com.skilldistillery.film.entities.Film;
 
 public class FilmDaoJdbcImpl implements FilmDAO {
@@ -66,5 +70,66 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 		}
 			return film;
 	}
+	
+	public Film createFilm(Film film) {
+		Connection conn = null;
+		
+			
+		conn = DriverManager.getConnection(URL, user, pass);
+		conn.setAutoCommit(false);
+		
+		String sqlst = "INSERT INTO film (f.title, f.description, f.release_year, f.language_id, f.rental_duration, \"\n"
+				+ "	    		   + \"f.rental_rate, f.length, f.replacement_cost, f.rating, f.special_features, l.name from film f inner join language l on l.id = f.language_id where f.id = ?";
+		
+		PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		
+		stmt.setString(1, f.title());
+		stmt.setString(2, "1");
+		stmt.setInt(3, f.rental_duration());
+		stmt.setDouble(4, f.rental_rate());
+		stmt.setDouble(5, f.replacement_cost());
+		int updateCount = stmt.executeUpdate();
+		System.out.println(updateCount + " film was created.");
+		if (updateCount == 1) {
+			ResultSet keys = stmt.getGeneratedKeys();
+			if (keys.next()) {
+				int newFilmId = keys.getInt(1);					
+				film.setId(newFilmId);
+				
+			}
+		}
+		conn.commit();
+		stmt.close();
+		conn.close();
+	} catch (SQLException e) {
+		e.printStackTrace();
+		if (conn != null) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				System.err.println("Error rolling back.");
+				e1.printStackTrace();
+			}
+		}
+	
+	return film;
+}
+	@Override
+	public Actor findActorById(int actorId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Film updateFilm(Film film) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<Actor> findActorByFilmId(int filmId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+		
+	
 
 }
