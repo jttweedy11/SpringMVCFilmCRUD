@@ -21,7 +21,8 @@
 		Replacement Cost <input type="text" value="${film.replacementCost }" name="Replacement" /> <br> 
 		Rating:	<input type="text" value="${film.rating }" name="rating" /> <br> 
 		Special Features: <input type="text" value="${film.specialFeatures }" name="specialFeatures" /> <br>
-		 <input type="submit" value="Update Film" />
+		 <input type="submit" value="Update Film" /><br>
+		 	<a href="home.do">Cancel</a>
 	</form>
 
 </body>
