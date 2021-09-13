@@ -38,7 +38,7 @@ public class FilmController {
 	public ModelAndView keywordSearch(String keyword) {
 		List<Film> films = filmDAO.findFilmByKeyword(keyword);
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("WEB-INF/views/searchKeyword.html");
+		mv.setViewName("WEB-INF/views/searchKeyword.jsp");
 		mv.addObject("films", films);
 		return mv;
 	}

@@ -25,7 +25,8 @@
 			</ul>
 
 			<a href="filmToUpdate.do?filmId=${film.id}">Edit Film</a>
-			<a href="deleteFilm.do?filmId=${film.id}">Delete Film</a>
+			<a href="deleteFilm.do?filmId=${film.id}">Delete Film</a><br>
+				<a href="home.do">Return Home</a>
 
 
 		</c:when>
