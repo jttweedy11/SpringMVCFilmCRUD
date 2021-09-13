@@ -7,10 +7,15 @@
 <body>
 	<h1>Welcome to the Movie App</h1>
 	<form action="GetMovieData.do" method="GET">
-		ID: <input type="text" name="id" /> <input type="submit"
+		Search by Film ID: <input type="text" name="id" /> <input type="submit"
 			value="Get Movie Data" />
 	</form>
 	<br />
-	<a href="src/main/webapp/WEB-INF/home.html">Create New Film</a><br/>
+	<form action="keywordSearch.do" method="GET">
+		Search by keyword: <input type="text" name="id" /> <input type="submit"
+			value="Get Movie Data" />
+	</form>
+	<br />
+	<a href="createFilm.html">Create New Film</a><br/>
 </body>
 </html>
